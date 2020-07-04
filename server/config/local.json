@@ -1,0 +1,12 @@
+{
+  "MONGO_URL": "mongodb://localhost:27017/testdbhem",
+  "MONGO_USER": "hemant",
+  "MONGO_PASSWORD": "helloworld",
+  "PORT": "3000",
+  "BASE_URL": "http://localhost:3000/",
+  "API_URL": "http://localhost:3000/",
+  "JWT": {
+    "SECRET": "hemant-test-environment",
+    "EXPIRES": "24h"
+  }
+}
