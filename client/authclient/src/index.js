@@ -19,3 +19,5 @@ class MyApp extends React.Component {
 }
 
 ReactDOM.render(<MyApp/>, document.getElementById('root'))
+
+export default MyApp;

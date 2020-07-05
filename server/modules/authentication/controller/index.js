@@ -25,7 +25,7 @@ export function authenticate(req, res, next) {
                     return res.status(200).json({
                         success: true,
                         message: 'Authentication Successful!',
-                        data: { token, user: user }
+                        data: { token: token, user: user }
                     });
             } else {
                 return res.status(200).json({

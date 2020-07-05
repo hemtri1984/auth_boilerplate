@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import MyApp from './../index';
 import './../index.css'
-
+var globalConstants = require('../globalconst');
 
 class RegisterPage extends React.Component {
 
@@ -10,17 +11,39 @@ class RegisterPage extends React.Component {
         password: '',
         telnum: '',
         address: '',
-        email: ''
+        email: '',
+        registered: false
     };
 
     registerUser = e => {
         console.log('Registering User')
         console.log(`Username: ${this.state.username}`);
-        console.log(`Username: ${this.state.username}`);
+        console.log(`Password: ${this.state.password}`);
         console.log(`telephone: ${this.state.telnum}`);
         console.log(`Address: ${this.state.address}`);
         console.log(`Email: ${this.state.email}`);
 
+        //request server to register user
+        fetch(`${globalConstants.BASE_URL}${globalConstants.AUTH_BASE}${globalConstants.REGISTER_API}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                name: this.state.username,
+                password: this.state.password,
+                telnum: this.state.telnum,
+                email: this.state.email,
+                address: this.state.address
+            })
+        }).then(data => data.json()).then(data => this.setState({
+            username: '',
+            password: '',
+            telnum: '',
+            address: '',
+            email: '',
+            registered: data.success
+        }));
         e.preventDefault();
     }
 
@@ -28,6 +51,12 @@ class RegisterPage extends React.Component {
         return (
             <div className="center">
                 <form onSubmit={this.registerUser}>
+                    {this.state.registered?(<div>
+                        User Registered Successfully!
+                    </div>): (
+                    <div>
+                        Please register the user<br/>
+                        </div>)}
                     <label className="header">Username</label><br/>
                     <input type="text" id="username" onChange={(e) => {this.setState({ username: e.target.value })}} />
                     <br/>
